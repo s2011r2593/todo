@@ -13,6 +13,7 @@ app.use(function (req, res, next) {
 })
 
 app.get('/', (req, res) => {
+  console.log('hi');
   tdldb.makeTable();
 });
 

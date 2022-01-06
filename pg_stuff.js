@@ -12,10 +12,8 @@ const pool = new Pool({
 const makeTable = () => {
   return new Promise(function(resolve, reject) {
     pool.query('CREATE TABLE [IF NOT EXISTS] tdl_items ( id SERIAL PRIMARY KEY, title VARCHAR(60), due TIMESAMPTZ, complete boolean );', (err, res) => {
-      if (err) {
-        reject(err);
-      }
-      resolve(res);
+      console.log(err, res);
+      pool.end();
     });
   })
 }
