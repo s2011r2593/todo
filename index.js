@@ -12,8 +12,11 @@ app.use(cors({
 }));
 
 app.get('/', (req, res) => {
-  tdldb.createTable();
+  res.send('hello');
 });
+
+app.get('/items', tdldb.getItems);
+app.post('/items', tdldb.writeItem);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`)

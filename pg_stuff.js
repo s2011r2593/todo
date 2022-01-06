@@ -1,19 +1,34 @@
-const Pool = require('pg').Pool;
+const { Pool, Client } = require('pg');
+
 const pool = new Pool({
-  user: 'postgres',
+  user: 'postgers',
   host: 'blood-essential-loss-postgresql-headless.sean.svc.cluster.local',
-  database: 'postgres',
-  password: 'CrossoverDownAlbaniaSagamikoOhloneMericaFrankTomohiko',
-  port: 5432,
+  database: 'tododb',
+  password: process.env.DB_PASSWORD,
+  port: '5432',
 });
 
-const createTable = () => {
-  pool.query('CREATE TABLE tdl ( id SERIAL PRIMARY KEY, title VARCHAR(60), due TIMESTAMPTZ, complete, boolean )', (err, res) => {
-    console.log(err, res);
-    pool.end();
+const writeItem = (request, response) => {
+  const { title, due, complete } = request.body;
+
+  pool.query('INSERT INTO tdl_items (title, due, complete) VALUES ($1, $2, $3)', [title, due, complete], (error, results) => {
+    if (error){
+      throw error;
+    }
+    response.status(201).send(`Item added with ID: ${result.insertId}`);
+  });
+}
+
+const getItems = (request, response) => {
+  pool.query('SELECT * FROM tdl_items', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows);
   });
 }
 
 module.exports = {
-  createTable
+  writeItem,
+  getItems,
 }
