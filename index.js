@@ -12,7 +12,7 @@ app.use(cors({
 }));
 
 app.get('/', (req, res) => {
-  tdldb.getItems();
+  tdldb.createTable();
 });
 
 app.listen(port, () => {
