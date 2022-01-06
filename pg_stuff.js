@@ -1,7 +1,7 @@
 const { Pool, Client } = require('pg');
 
 const pool = new Pool({
-  user: 'postgers',
+  user: 'postgres',
   host: 'blood-essential-loss-postgresql-headless.sean.svc.cluster.local',
   database: 'tododb',
   password: process.env.DB_PASSWORD,
