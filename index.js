@@ -7,7 +7,7 @@ const tdldb = require('./pg_stuff');
 
 app.use(express.json());
 app.use(cors({
-  origin: 'blood-essential-loss-postgresql-headless.sean.svc.cluster.local',
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 
