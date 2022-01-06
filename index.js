@@ -4,6 +4,9 @@ const app = express();
 const port = 3001;
 const tdldb = require('./pg_stuff');
 
+var pgp = require('pg-promise')
+var db = pgp('postgres://postgres:CrossoverDownAlbaniaSagamikoOhloneMericaFrankTomohiko@blood-essential-loss-postgresql-headless.sean.svc.cluster.local:5432/postgres');
+
 app.use(express.json())
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', 'blood-essential-loss-postgresql-headless.sean.svc.cluster.local');
@@ -13,7 +16,7 @@ app.use(function (req, res, next) {
 })
 
 app.get('/', (req, res) => {
-  tdldb.makeTable();
+  db.one('CREATE TABLE tdl_items ( id SERIAL PRIMARY KEY, title VARCHAR(60), due TIMESTAMPTZ, complete boolean )')
 });
 
 app.listen(port, () => {
