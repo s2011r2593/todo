@@ -11,7 +11,7 @@ const pool = new Pool({
 const writeItem = (request, response) => {
   const { title, due, complete } = request.body;
 
-  pool.query('INSERT INTO tdl_items (title, due, complete) VALUES ($1, to_timestamp($2), $3)', [title, due, complete], (error, results) => {
+  pool.query('INSERT INTO items (title, due, complete) VALUES ($1,  $2, $3)', [title, due, complete], (error, results) => {
     if (error){
       throw error;
     }
@@ -20,7 +20,7 @@ const writeItem = (request, response) => {
 }
 
 const getItems = (request, response) => {
-  pool.query('SELECT * FROM tdl_items', (error, results) => {
+  pool.query('SELECT * FROM items', (error, results) => {
     if (error) {
       throw error
     }
