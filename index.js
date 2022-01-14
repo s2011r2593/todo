@@ -17,6 +17,7 @@ app.get('/', (req, res) => {
 
 app.get('/items', tdldb.getItems);
 app.post('/items', tdldb.writeItem);
+app.post('/delete', tdldb.deleteItem);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`)

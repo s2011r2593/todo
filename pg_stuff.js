@@ -12,10 +12,10 @@ const writeItem = (request, response) => {
   const { title, due, complete } = request.body;
 
   pool.query('INSERT INTO items (title, due, complete) VALUES ($1,  $2, $3)', [title, due, complete], (error, results) => {
-    if (error){
+    if (error) {
       throw error;
     }
-    response.status(201).send(`Item added with ID: ${result.insertId}`);
+    response.status(201).send(`Item added with ID: ${results.insertId}`);
   });
 }
 
@@ -28,7 +28,18 @@ const getItems = (request, response) => {
   });
 }
 
+const deleteItem = (request, response) => {
+  const { id } = request.body;
+  pool.query('DELETE FROM items WHERE id = $1', [id], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(201).send(`Deleted item with ID ${id}`);
+  })
+}
+
 module.exports = {
   writeItem,
   getItems,
+  deleteItem,
 }
